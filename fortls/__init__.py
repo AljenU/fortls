@@ -470,9 +470,9 @@ def debug_server_parser(args):
     pp_suffixes = None
     pp_defs = {}
     include_dirs = set()
+    config_path = locate_config(args.debug_rootpath)
     if args.debug_rootpath:
         # Check for config files
-        config_path = locate_config(args.debug_rootpath)
         config_exists = os.path.isfile(config_path)
         if config_exists:
             try:
@@ -490,7 +490,11 @@ def debug_server_parser(args):
                         pp_defs = {key: "" for key in pp_defs}
             except:
                 print(f"Error while parsing '{args.config}' settings file")
-
+        else:
+            print(f"'{args.config}' settings file does not exist")
+    elif config_path:
+        print(f"'{args.config}' settings file is ignored, because option --debug_rootpath was not specified")
+        
     print("\nTesting parser")
     print('  File = "{}"'.format(args.debug_filepath))
     file_obj = FortranFile(args.debug_filepath, pp_suffixes)
