@@ -127,7 +127,7 @@ class FortranRegularExpressions:
     PP_REGEX: Pattern = compile(r"#(if |ifdef|ifndef|else|elif|endif)")
     PP_DEF: Pattern = compile(r"#(define|undef)[ ]*([\w]+)(\((\w+(,[ ]*)?)+\))?", I)
     PP_DEF_TEST: Pattern = compile(r"(![ ]*)?defined[ ]*\([ ]*(\w*)[ ]*\)$", I)
-    PP_INCLUDE: Pattern = compile(r"#include[ ]*([\"\w\.]*)", I)
+    PP_INCLUDE: Pattern = compile(r"#include[ ]*\"([^\"]*)\"", I)
     PP_ANY: Pattern = compile(r"(^#:?\w+)")
     # Context matching rules
     CALL: Pattern = compile(r"[ ]*CALL[ ]+[\w%]*$", I)
