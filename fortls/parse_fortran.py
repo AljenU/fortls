@@ -2258,6 +2258,11 @@ def preprocess_file(
 
             else:
                 log.debug(f"{line.strip()} !!! Could not locate include file ({i + 1})")
+                print(f"{line.strip()} !!! Could not locate include file ({i + 1})",file=sys.stderr)
+                print("      included in '"+file_path+"'",file=sys.stderr)
+                for include_dir in include_dirs:
+                    include_path_tmp = os.path.join(include_dir, include_filename)
+                    print("   tried '"+include_path_tmp+"'",file=sys.stderr)
 
         # Substitute (if any) read in preprocessor macros
         for def_tmp, value in defs_tmp.items():
